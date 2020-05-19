@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - pgdatavol:/var/lib/postgressql/data
+      - pgdatavol:/var/lib/postgresql/data
     ports:
       - "5432"
     environment:
