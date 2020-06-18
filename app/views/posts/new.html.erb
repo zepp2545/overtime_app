@@ -1,0 +1,5 @@
+<%= form_with model: @post, remote: true do |f| %>
+  <%= f.date_field :date %>
+  <%= f.text_area :rationale %>
+  <%= f.submit 'Save' %>
+<% end %>
