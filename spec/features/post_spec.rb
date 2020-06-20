@@ -1,24 +1,34 @@
 require 'rails_helper'
 
 describe 'navigate' do
+    before do
+        user = User.create(email: 'zepp25458565@gmail.com', password: 'km25458565', password_confirmation: 'km25458565', first_name: 'Akio', last_name: 'Maruyo')
+        login_as(user, :scope => :user)
+        visit new_post_path
+    end
+
     describe 'index' do
+        before do
+          visit posts_path
+        end
+
         it 'can be reached' do
-            visit posts_path
             expect(page.status_code).to eq(200)
         end
 
         it 'has a title of Posts' do
-            visit posts_path
             expect(page).to have_content(/Posts/)
+        end
+
+        it 'has a list of Posts' do
+            post1 = Post.create(date: Date.today, rationale: 'post1')
+            post2 = Post.create(date: Date.today, rationale: 'post2')
+            visit posts_path
+            expect(page).to have_content(/post1|post2/)
         end
     end
 
     describe 'creation' do
-        before do
-            user = User.create(email: 'zepp25458565@gmail.com', password: 'km25458565', password_confirmation: 'km25458565', first_name: 'Akio', last_name: 'Maruyo')
-            login_as(user, :scope => :user)
-            visit new_post_path
-        end
 
         it 'has a new form that can be reached' do
             expect(page.status_code).to eq(200)
