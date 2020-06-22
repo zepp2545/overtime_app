@@ -56,6 +56,14 @@ describe 'navigate' do
 
     end
 
+    describe 'New' do
+        it 'has a link from the homepage' do
+            visit root_path
+            click_link("new_post_from_nav")
+            expect(page.status_code).to eq(200)
+        end
+    end
+
     describe 'Edit' do
         before do
             @post = FactoryBot.create(:post)
